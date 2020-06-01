@@ -1,1 +1,73 @@
-test
+/*
+定义一个类，描述一个矩形，包含有长，宽两种属性和计算面积方法
+编写一个类，继承自矩形类，同时该类描述长方体，具有长，宽，高属性和计算体积的方法
+编写一个测试类，对以上两个类进行测试，创建一个长方体，定义其长宽高，输出其底面积和体积
+*/
+public class Rectangle{
+    double x,y,area;
+    void setLength(double x){
+        if(x>0) {
+            this.x = x;
+        }
+    }
+    double getLength(){
+        return x ;
+    }
+    void setWidth(double y){
+        if(y>0) {
+            this.y = y;
+        }
+    }
+    double getWidth(){
+        return y;
+    }
+    double getArea(){
+        area = x * y;
+        return area;
+    }
+}
+
+public class Cuboid extends Rectangle {
+    double z,volume;
+    void setHeight(double z){
+        if(z>0) {
+            this.z = z;
+        }
+    }
+    double getHeight(){
+        return z;
+    }
+    double getVolume(){
+        volume = x * y * z;
+        return volume;
+    }
+}
+
+import java.util.*;
+public class test {
+    public static void main(String args[]){
+        Rectangle rect = new Rectangle();
+        Cuboid cub = new Cuboid();
+        double x,y,z;
+        Scanner in = new Scanner(System.in);
+        System.out.print("请输入长:");
+        x = in.nextDouble();
+        System.out.print("请输入宽:");
+        y = in.nextDouble();;
+        System.out.print("请输入高:");
+        z = in.nextDouble();
+        rect.setLength(x);
+        rect.setWidth(y);
+        System.out.println("矩形的长:"+rect.getLength());
+        System.out.println("矩形的宽:"+rect.getWidth());
+        System.out.println("矩形的面积"+rect.getArea());
+        cub.setLength(x);
+        cub.setWidth(y);
+        cub.setHeight(z);
+        System.out.println("长方体的长:"+cub.getLength());
+        System.out.println("长方体的宽:"+cub.getWidth());
+        System.out.println("长方体的高:"+cub.getHeight());
+        System.out.println("长方体的底面积:"+cub.getArea());
+        System.out.println("长方体的体积"+cub.getVolume());
+    }
+}
