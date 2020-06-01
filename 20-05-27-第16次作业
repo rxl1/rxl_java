@@ -1,1 +1,83 @@
+/*
+定义一个人类Human，内含私有的姓名，性别，年龄变量，定义获取各变量的公共方法，在定义公共的构造方法和思考方法
+编写继承人类的学生类Student，增加私有的学号变量以及公共的获取学号的方法，公共的构造方法，学习方法
+最后设计一个主类，构造若干个学生对象，并把他们的数据和行为显示出来
+*/
+public class Human {
+    private String name;
+    private String sex;
+    private int age;
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setSex(String sex){
+        this.sex = sex;
+    }
+    public String getSex(){
+        return  sex;
+    }
+    public void setAge(int age){
+        this.age = age;
+    }
+    public int getAge(){
+        return age;
+    }
+    public Human(String name,String sex,int age){
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+    }
+    public void Thinking(String problem){
+        System.out.println(name+"正在思考"+problem);
+    }
+}
+
+public class Student extends Human{
+    private String ID;
+    public void setID(String ID){
+        this.ID = ID;
+    }
+    public String getID(){
+        return ID;
+    }
+    public Student(String name,String sex,int age,String ID){
+        super(name,sex,age);
+        this.ID = ID;
+    }
+    public void Study(String subject){
+        System.out.println(getName()+"正在学习"+subject);
+    }
+}
+
+//enum stu_name{
+//    张三,李四,王五,赵六;
+//}
+public class main {
+    public static void main(String args[]){
+        Student stu_1 = new Student("张三","男",17,"18082101");
+        Student stu_2 = new Student("李四","女",20,"18082102");
+        Student stu_3 = new Student("王五","男",21,"18082103");
+        System.out.println("姓名:"+stu_1.getName()+"\t"+
+                           "性别:"+stu_1.getSex()+"\t"+
+                           "年龄:"+stu_1.getAge()+"\t"+
+                           "学号:"+stu_1.getID());
+        System.out.println("姓名:"+stu_2.getName()+"\t"+
+                "性别:"+stu_2.getSex()+"\t"+
+                "年龄:"+stu_2.getAge()+"\t"+
+                "学号:"+stu_2.getID());
+        System.out.println("姓名:"+stu_3.getName()+"\t"+
+                "性别:"+stu_3.getSex()+"\t"+
+                "年龄:"+stu_3.getAge()+"\t"+
+                "学号:"+stu_3.getID());
+        stu_1.Study("Java");
+        stu_2.Study("算法");
+        stu_3.Study("赚钱");
+        Human human = new Human("任老板","男",25);
+        human.Thinking("互联网未来发展趋势");
+    }
+}
+
 
