@@ -1,0 +1,35 @@
+/*
+解析一个文件中的价格数据，并计算平均价格，内容如下：
+商品列表.txt
+电视机 2567元/台
+洗衣机  3562元/台
+冰箱 6573元/台
+*/
+import java.io.*;
+import java.util.*;
+public class homework5_25 {
+    public static void main(String args[]){
+        File file = new File("C:\\Users\\Grace\\Desktop\\商品列表.txt");
+//        txt文件须用 Unicode编码
+        System.out.println(file);
+        Scanner sc = null;
+        int count = 0;
+        double sum = 0;
+        try{
+            int price = 0;
+            sc = new Scanner(file);
+            sc.useDelimiter("[^0123456789]+");
+            while(sc.hasNext()){
+                price = sc.nextInt();
+                count++;
+                sum = sum + price;
+                System.out.println(price);
+            }
+            double aver = sum / count;
+            System.out.println("平均价格:"+aver);
+        }
+        catch(FileNotFoundException exp){
+            System.out.println(exp);
+        }
+    }
+}
