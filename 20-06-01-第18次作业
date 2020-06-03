@@ -1,0 +1,36 @@
+/*定义图形接口，内含常量字段和抽象的计算面积和周长的方法
+再定义实现该图形接口的圆类，实现计算面积和周长方法
+再定义实现该图形接口的正方形类，也实现计算面积和周长方法
+最后定义一个主类，构造圆和正方形对象，并计算他们的面积and周长
+ */
+interface figure {
+    double r = 5;
+    double x = 2.5;
+    double pi = 3.14;
+    double getArea();
+    double getGirth();
+}
+class Circle implements figure{
+    public double getArea(){
+        return pi *r *r;
+    }
+    public double getGirth(){
+        return 2 * pi *r;
+    }
+}
+class Square implements figure{
+    public double getArea(){
+        return x * x;
+    }
+    public double getGirth() {
+        return 4*x;
+    }
+}
+class main{
+    public static void main(String args[]){
+        Circle circle = new Circle();
+        Square square = new Square();
+        System.out.printf("圆形面积:%.2f\t周长:%.2f\n",circle.getArea(),circle.getGirth());
+        System.out.printf("正方形面积:%.2f\t周长:%.2f",square.getArea(),square.getGirth());
+    }
+}
