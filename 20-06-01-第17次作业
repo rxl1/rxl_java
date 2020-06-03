@@ -52,6 +52,7 @@ class main{
         Circle circle = new Circle(r);
         Square square = new Square(x);
         System.out.printf("该圆的面积:%.2f\t周长:%.2f\n",circle.getArea(),circle.getGirth());
+        // 此处会造成浮点数误差，计算机计算使用二进制，浮点数转换为二进制会产生误差
         System.out.println("该正方形的面积:"+square.getArea()+"\t"+"周长:"+square.getGirth());
     }
 }
