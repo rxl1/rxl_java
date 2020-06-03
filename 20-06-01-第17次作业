@@ -1,0 +1,57 @@
+//定义一个抽象的图形类，内含抽象的计算面积和周长的方法，
+//再定义该抽象类的圆类，重写计算面积和周长的方法
+//再定义继承该抽象类的正方形类，重写计算面积和周长的方法
+//最后定义一个主类，构造圆和正方形对象，并计算他们的面积和周长
+import java.util.Scanner;
+abstract class Figure {
+    public abstract double getArea();
+    public abstract double getGirth();
+}
+class  Circle extends Figure{
+    double x;
+    double pi = 3.14;
+    double area;
+    double girth;
+    public Circle(double x){
+        this.x = x;
+        area = pi * x * x;
+        girth = 2 * pi * x;
+    }
+    public double getArea() {
+        return area;
+    }
+    public double getGirth() {
+        return girth;
+    }
+}
+class Square extends Figure{
+    double x;
+    double area;
+    double girth;
+    public Square(double x){
+        this.x = x;
+        area = x * x;
+        girth = 4 * x;
+    }
+    public double getArea(){
+        return area;
+    }
+    public double getGirth(){
+        return girth;
+    }
+}
+class main{
+    public static void main(String args[]){
+        double r;
+        double x;
+        Scanner in = new Scanner(System.in);
+        System.out.print("输入圆形半径:");
+        r = in.nextDouble();
+        System.out.print("输入正方形边长:");
+        x = in.nextDouble();
+        Circle circle = new Circle(r);
+        Square square = new Square(x);
+        System.out.printf("该圆的面积:%.2f\t周长:%.2f\n",circle.getArea(),circle.getGirth());
+        System.out.println("该正方形的面积:"+square.getArea()+"\t"+"周长:"+square.getGirth());
+    }
+}
