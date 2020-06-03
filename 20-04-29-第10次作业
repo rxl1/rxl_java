@@ -1,0 +1,21 @@
+//计算某年某月某日和某年某月某日间隔多少天
+import java.time.*;
+import java.util.Scanner;
+import java.time.temporal.ChronoUnit;
+public class testTime {
+    public static void main(String args[]){
+        Scanner in = new Scanner(System.in);
+        System.out.print("输入开始的年月日:");
+        int s_year = in.nextInt();
+        int s_month = in.nextInt();
+        int s_day = in.nextInt();
+        LocalDate start_date = LocalDate.of(s_year,s_month,s_day);
+        System.out.print("输入结束的年月日:");
+        int e_year = in.nextInt();
+        int e_month = in.nextInt();
+        int e_day = in.nextInt();
+        LocalDate end_date = LocalDate.of(e_year,e_month,e_day);
+        long days = ChronoUnit.DAYS.between(start_date,end_date);
+        System.out.println(start_date+"和"+end_date+"相隔:"+days+"天");
+    }
+}
