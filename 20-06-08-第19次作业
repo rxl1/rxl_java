@@ -1,0 +1,104 @@
+/*张平 李明 赵刚三个人排队买票，售票员只有3张5元的，票5元一张，
+张平拿一张20元的人民币在李明的前面买票，
+李明排在赵刚前面拿一张10元的买票
+赵刚拿一张5元的买票
+ */
+ //进程问题
+ 
+public class main {
+    public static void main(String args[]){
+        WindowTicket win = new WindowTicket();
+        win.setTitle("欢迎购票");
+    }
+}
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class WindowTicket extends JFrame implements Runnable, ActionListener {
+    SellTicket ticketAgent;
+    Thread 张平,李明,赵刚;
+    static JTextArea text;
+    JButton startBuy = new JButton("开始购票");
+    WindowTicket(){
+        ticketAgent = new SellTicket();
+        张平 = new Thread(this);
+        张平.setName("张平");
+        李明 = new Thread(this);
+        李明.setName("李明");
+        赵刚 = new Thread(this);
+        赵刚.setName("赵刚");
+        text = new JTextArea(10,30);
+        startBuy.addActionListener(this);
+        add(text,BorderLayout.CENTER);
+        add(startBuy, BorderLayout.NORTH);
+        setVisible(true);
+        setSize(360,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void actionPerformed(ActionEvent e) {
+        try {
+            张平.start();
+            李明.start();
+            赵刚.start();
+        }
+        catch (Exception exp) {}
+    }
+        public void run(){
+            if(Thread.currentThread() == 张平){
+                ticketAgent.售票规则(20);
+            }
+            else if(Thread.currentThread() == 李明){
+                ticketAgent.售票规则(10);
+            }
+            else if(Thread.currentThread() == 赵刚){
+                ticketAgent.售票规则(5);
+            }
+        }
+    }
+
+public class SellTicket {
+    int count_5yuan=3;
+    int count_10yuan=0;
+    int count_20yuan= 0;
+    String s =null;
+    public synchronized void 售票规则(int money){
+        String name = Thread.currentThread().getName();
+        if(money == 5){
+            count_5yuan =  count_5yuan +1;
+            s = "给" + name + "票," + name + "的钱正好";
+            WindowTicket.text.append("\n"+s);
+        }
+        else if(money == 10){
+            while(count_5yuan < 1){
+                try{
+                    WindowTicket.text.append("\n" + name + "请等待...");
+                    wait();
+                }
+                catch (InterruptedException e){}
+            }
+            count_5yuan = count_5yuan - 1;
+            count_10yuan = count_10yuan + 1;
+            s = "给" + name + "票," + name + "给10元,找零5元" ;
+            WindowTicket.text.append("\n"+s);
+        }
+        else if(money == 20){
+            while(count_5yuan < 1 || count_10yuan < 1){
+                try{
+                    WindowTicket.text.append("\n"+name+"请等待...");
+                    wait();
+                }
+                catch(InterruptedException e){}
+            }
+            count_5yuan = count_5yuan - 3;
+            count_20yuan = count_20yuan + 1;
+            s = "给" + name + "票," + name + "给20,找零15元";
+            WindowTicket.text.append("\n"+s);
+        }
+        notifyAll();
+        s = count_5yuan + "张5元"+ count_10yuan + "张10元"+ count_20yuan + "张20元";
+
+        WindowTicket.text.append("\n"+"售票员此时有" + s);
+    }
+}
+
