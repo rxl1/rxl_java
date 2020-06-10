@@ -1,0 +1,94 @@
+//注意: 假如定义一个接口内含多种方法，一个类继承这个接口时，接口内的所有方法都需在类中重写
+/*体操比赛计算选手的成绩的办法是去掉一个最高分和最低分后再计算平均分，
+而学校考察一个班级某科目的考试情况，是计算全班同学的平均成绩。
+定义体操类和学校类，两类均实现计算平均值接口，但实现的方法不同。
+*/
+interface average {
+    public double average_gym();
+    public double average_exam();
+
+}
+
+import java.util.*;
+public class score_gym implements average{
+    double final_score;
+    double score[]=null;
+    double sum=0;
+    int num_sub;
+    public score_gym(double score[],int num_sub){
+        this.score = score;
+        this.num_sub = num_sub;
+    }
+    @Override
+    public double average_gym(){
+        Arrays.sort(score);
+        score[0]=0;
+        score[score.length-1]=0;
+        for(int i=0;i<score.length;i++){
+            sum = sum + score[i];
+        }
+        final_score = sum / num_sub;
+        return final_score;
+    }
+    @Override
+    public double average_exam() {
+        return 0;
+    }
+}
+
+public class score_stu implements average{
+    double final_score;
+    double score[]=null;
+    double sum = 0;
+    int num_stu;
+    public score_stu(double score[],int num_stu){
+        this.score = score;
+        this.num_stu = num_stu;
+    }
+    @Override
+    public double average_exam(){
+        for(int j=0;j<score.length;j++){
+            sum = sum + score[j];
+        }
+        final_score = sum / num_stu;
+        return final_score;
+    }
+    @Override
+    public double average_gym() {
+        return 0;
+    }
+}
+
+import java.util.*;
+class main {
+    public static void main(String args[]){
+        int num_sub;
+        int num_stu;
+        double final_gym;
+        double final_stu;
+        Scanner in = new Scanner(System.in);
+        // 先计算体操
+        System.out.print("请输入体操比赛评委个数:");
+        num_sub = in.nextInt();
+        double score_gymnastics[] = new double[num_sub];
+        System.out.print("输入分数:");
+        for(int i=0;i<score_gymnastics.length;i++){
+            score_gymnastics[i] = in.nextDouble();
+        }
+        score_gym gym = new score_gym(score_gymnastics,num_sub);
+        final_gym = gym.average_gym();
+        System.out.printf("去掉一个最高分,一个最低分,体操选手最终得分:%.2f\n",final_gym);
+        // 再计算班级平均分
+        System.out.print("请输入班级学生个数:");
+        num_stu = in.nextInt();
+        double score_students[] = new double[num_stu];
+        System.out.print("输入分数:");
+        for(int j=0;j<score_students.length;j++){
+            score_students[j] = in.nextDouble();
+        }
+        score_stu stu = new score_stu(score_students,num_stu);
+        final_stu = stu.average_exam();
+        System.out.printf("班级考试平均分:%.2f",final_stu);
+    }
+}
+
