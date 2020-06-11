@@ -1,1 +1,45 @@
-
+/*手机专卖店为了促销自己的产品，决定发行内部购物券，但其他商场不能发行该购物券。
+编写一个MobileShop类（模拟手机专卖店）
+该类有一个名字为InnerPurchaseMoney的内部类（模拟内部购物券）。
+ */
+class MobileShop{
+    InnerPurchaseMoney pm_1;
+    InnerPurchaseMoney pm_2;
+    int phoneAmount;
+    MobileShop(){
+        pm_1=new InnerPurchaseMoney(20000);
+        pm_2=new InnerPurchaseMoney(10000);
+    }
+    void setMobileAmount(int m){
+        phoneAmount = m;
+    }
+    int getMobileAmount(){
+        return phoneAmount;
+    }
+    class InnerPurchaseMoney{
+        int moneyValue;
+        InnerPurchaseMoney(int m){
+            moneyValue=m;
+        }
+        void buyPhone(){
+            if(moneyValue >= 20000){
+                phoneAmount = phoneAmount - 6;
+                System.out.println("用价值"+moneyValue+"的内部购物券买了6部手机");
+            }
+            else if(moneyValue < 20000 && moneyValue >= 10000){
+                phoneAmount = phoneAmount - 3;
+                System.out.println("用价值"+moneyValue+"的内部购物券买了3部手机");
+            }
+        }
+    }
+}
+class main{
+    public static void main(String args[]){
+        MobileShop shop=new MobileShop();
+        shop.setMobileAmount(30);
+        System.out.println("手机专卖店目前有"+shop.getMobileAmount()+"部手机");
+        shop.pm_1.buyPhone();
+        shop.pm_2.buyPhone();
+        System.out.println("手机专卖店目前有"+shop.getMobileAmount()+"部手机");
+    }
+}
