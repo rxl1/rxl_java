@@ -1,0 +1,77 @@
+/*
+编程题（回顾String类的知识）
+某人简历的内容如下：
+“姓名：张三；出生日期：1989.10.16。个人网址：http://www.zhang.com。身高：185 cm,体重：72 Kg”
+编写一个Java应用程序，判断简历中的姓名是否姓张，
+单行输出简历中的出生日期和个人网站，并判断简历中的身高是否大于180，体重是否小于75 kg
+运行结果：
+姓名：XXX
+生日：XXXX-XX-XX
+博客：XXXXXXXX
+XXX身高185，大于或等于185cm
+XXX体重72，小于75kg
+ */
+ //傻逼老师说是复习String类，你妈的什么都不说清，我做你麻痹，傻逼一个
+import java.util.*;
+class Resume {
+    String name;
+    String birthday;
+    String blog;
+    int height;
+    int weight;
+    Resume(String name,String birthday,String blog,int height,int weight){
+        this.name = name;
+        this.birthday = birthday;
+        this.blog = blog;
+        this.height = height;
+        this.weight = weight;
+    }
+    void judgeResume(Resume x){
+        System.out.println("姓名:"+x.name);
+        System.out.println("出生日期:"+x.birthday);
+        System.out.println("博客地址:"+x.blog);
+        System.out.print("身高:"+x.height+"cm");
+        if(x.height >180){
+            System.out.println("\t"+"大于180cm");
+        }
+        else if (x.height ==180){
+            System.out.println("\t"+"等于180cm");
+        }
+        else{
+            System.out.println("\t"+"小于180cm");
+        }
+        System.out.print("体重:"+x.weight+"kg");
+        if(x.weight > 70){
+            System.out.println("\t"+"大于70kg");
+        }
+        else if(x.weight == 70){
+            System.out.println("\t"+"等于70kg");
+        }
+        else{
+            System.out.println("\t"+"小于70kg");
+        }
+    }
+}
+
+class Main{
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String name;
+        String birthday;
+        String blog;
+        int height;
+        int weight;
+        System.out.print("姓名:");
+        name = in.next();
+        System.out.print("生日:");
+        birthday = in.next();
+        System.out.print("博客:");
+        blog = in.next();
+        System.out.print("身高:");
+        height = in.nextInt();
+        System.out.print("体重:");
+        weight = in.nextInt();
+        Resume resume = new Resume(name,birthday,blog,height,weight);
+        resume.judgeResume(resume);
+    }
+}
