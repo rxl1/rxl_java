@@ -1,0 +1,56 @@
+/*
+*编程题（回顾流的知识掌握字符输入、输出流用法）
+现有如下格式的成绩单（文本格式）score.txt:
+姓名：张三，数学72分，物理67分，英语70分.
+姓名：李四，数学92分，物理97分，英语88分.
+姓名：王五，数学68分，物理80分，英语77分.
+要求按行读入成绩单，并在该行的尾部加上该同学的总成绩，然后再将该行写入到一个名字为scoreAnalysis.txt的文件中。
+* 运行结果：
+姓名：张三，数学72分，物理67分，英语70分. 总分：209.0
+姓名：李四，数学92分，物理97分，英语88分. 总分：277.0
+姓名：王五，数学68分，物理80分，英语77分. 总分：225.0
+ */
+import java.io.*;
+import java.util.*;
+class Fenxi{
+    public static double getTotalScore(String s ){
+        Scanner scanner = new Scanner(s);
+        scanner.useDelimiter("[^0123456789.]+");
+        double totalScore=0;
+        while(scanner.hasNext()){
+            try{
+                double score = scanner.nextDouble();
+                totalScore = totalScore+score;
+            }
+            catch(InputMismatchException exp){
+                String t = scanner.next();
+            }
+        }
+        return  totalScore;
+    }
+}
+class Analysis {
+    public static void main(String[] args) {
+    File fRead=new File("C:\\Users\\Grace\\Desktop\\score.txt");
+    File fWrite=new File("C:\\Users\\Grace\\Desktop\\scoreAnalysis.txt");
+    try{
+        Writer out = new FileWriter(fWrite,true);
+        BufferedWriter bufferedWrite = new BufferedWriter(out);
+        Reader in = new FileReader(fRead);
+        BufferedReader bufferedRead = new BufferedReader(in);
+        String str = null;
+        while((str= bufferedRead.readLine())!=null){
+            double totalScore = Fenxi.getTotalScore(str);
+            str = str+"总分:"+totalScore;
+            System.out.println(str);
+            bufferedWrite.write(str);
+            bufferedWrite.newLine();;
+        }
+        bufferedRead.close();
+        bufferedWrite.close();
+    }
+    catch(IOException e){
+        System.out.println(e.toString());
+        }
+    }
+}
